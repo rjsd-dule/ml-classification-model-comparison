@@ -22,22 +22,22 @@ El modelo **SVC (Support Vector Classifier)** fue una pieza central en la compar
 - **Optimización del parámetro C**: Se realizó una búsqueda iterativa (rango 1-27) para el parámetro de regularización. Se identificó que un **C = 4** con kernel **rbf** lograba un equilibrio óptimo, alcanzando un **99.35% de precisión** en pruebas.
 - **Grados en Polinomios**: Para el kernel `poly`, se probaron grados 2 y 3, observando una alta capacidad de ajuste pero con mayor costo computacional.
 
-## 3. Validación Cruzada y Uso de "Bandas"
+## 3. Validación Cruzada y Representación Gráfica
 
-Se utilizó `GroupKFold` y `cross_validate` para garantizar la estabilidad del modelo. Un aspecto clave en este análisis fue la **visualización de bandas**:
+Se utilizó `GroupKFold` y `cross_validate` para garantizar la estabilidad del modelo. La evaluación del rendimiento se apoyó en una sólida infraestructura de visualización:
 
-- **¿Qué representan las bandas?**: En las gráficas de rendimiento (como las de `n_estimators` o `C`), el uso de Seaborn permitió visualizar una **banda sombreada** alrededor de la línea de precisión media.
-- **Significado técnico**: Esta banda representa el **intervalo de confianza** (o desviación estándar) de los resultados obtenidos en los diferentes "folds" de la validación cruzada.
-- **Impacto en la optimización**:
-  - Una banda **estrecha** indicaba que el modelo era estable y consistente independientemente de cómo se dividieran los datos.
-  - El análisis de estas bandas permitió confirmar que el modelo no solo era preciso, sino también **robusto**, ya que las variaciones entre grupos de datos eran mínimas.
+- **Estructura de Gráficos con Matplotlib**: Se empleó la función `add_subplot` de la librería **Matplotlib** para organizar las métricas de rendimiento en una cuadrícula comparativa. Esto permitió analizar simultáneamente el comportamiento de entrenamiento y prueba bajo distintos parámetros.
+- **Visualización de la Varianza**: En lugar de simples líneas, los gráficos incluyen áreas sombreadas generadas mediante el análisis de validación cruzada. Estas áreas representan el **intervalo de confianza** (o desviación estándar) de los resultados en los diferentes "folds".
+- **Análisis de Estabilidad**:
+  - Un área sombreada **reducida** en el subplot indica que el modelo es estable y consistente, con poca variabilidad ante diferentes divisiones de los datos.
+  - El uso de estos gráficos permitió confirmar que el modelo no solo era preciso, sino también **robusto**, validando visualmente la convergencia entre los datos de entrenamiento y validación.
 
 ## 4. Visualización y Herramientas de Análisis
 
-- **Matplotlib y Seaborn**: Esenciales para graficar la evolución de la precisión.
-- **Curvas de Aprendizaje**: Permitieron detectar visualmente el punto donde el modelo dejaba de aprender y empezaba a sobreajustarse.
-- **Diagramas de Dispersión**: Utilizados para validar cómo el modelo SVC separaba las diferentes clases de pH en el espacio dimensional.
+- **Matplotlib**: Se utilizó principalmente para la gestión de figuras y la creación de sub-gráficos (`add_subplot`), permitiendo una comparación técnica detallada entre modelos.
+- **Seaborn**: Complementó a Matplotlib para la representación estadística, facilitando la visualización de las tendencias de precisión y sus intervalos de confianza.
+- **Curvas de Aprendizaje**: Integradas en los subplots para detectar visualmente el punto de equilibrio óptimo y prevenir el sobreajuste (overfitting).
 
 ## 5. Conclusión
 
-El proyecto demuestra que mediante el ajuste fino de parámetros en SVC y RandomForest, y la validación rigurosa a través de bandas de confianza, es posible crear un sistema de clasificación de suelos con una fiabilidad cercana al 100%. La estabilidad mostrada por las bandas de validación asegura que el modelo es apto para su aplicación en entornos reales de análisis edafológico.
+El proyecto demuestra que mediante el ajuste fino de parámetros en SVC y RandomForest, y la validación rigurosa a través de **intervalos de confianza** visualizados en subplots, es posible crear un sistema de clasificación de suelos con una fiabilidad cercana al 100%. La estabilidad mostrada por los **gráficos de validación** asegura que el modelo es apto para su aplicación en entornos reales de análisis edafológico.
