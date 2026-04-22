@@ -38,6 +38,21 @@ Se utilizó `GroupKFold` y `cross_validate` para garantizar la estabilidad del m
 - **Seaborn**: Complementó a Matplotlib para la representación estadística, facilitando la visualización de las tendencias de precisión y sus intervalos de confianza.
 - **Curvas de Aprendizaje**: Integradas en los subplots para detectar visualmente el punto de equilibrio óptimo y prevenir el sobreajuste (overfitting).
 
-## 5. Conclusión
+## 5. Comparativa de Modelos y Conclusión
 
-El proyecto demuestra que mediante el ajuste fino de parámetros en SVC y RandomForest, y la validación rigurosa a través de **intervalos de confianza** visualizados en subplots, es posible crear un sistema de clasificación de suelos con una fiabilidad cercana al 100%. La estabilidad mostrada por los **gráficos de validación** asegura que el modelo es apto para su aplicación en entornos reales de análisis edafológico.
+Tras evaluar los diferentes algoritmos, se presenta la siguiente comparativa de rendimiento basada en las métricas finales obtenidas:
+
+| Métrica | DecisionTree | RandomForest | SVC | MLPClassifier |
+| :--- | :---: | :---: | :---: | :---: |
+| **Accuracy** | 99.2% | 95.92% | **100.0%** | 99.70% |
+| **Precision** | 97.77% | 81.43% | **100.0%** | 99.25% |
+| **Recall** | 98.87% | 85.71% | **100.0%** | 99.31% |
+| **F1-Score** | 98.2% | 83.19% | **100.0%** | 99.28% |
+
+### Conclusión Final
+El modelo **SVC (Support Vector Classifier)** demostró el rendimiento más sobresaliente, alcanzando una precisión y estabilidad del **100%** tras la optimización del parámetro **C=4** y el uso del kernel **rbf**. Esta superioridad se debe a su capacidad para definir fronteras de decisión precisas en el espacio dimensional de los valores de pH.
+
+El éxito del proyecto radica en:
+1.  El ajuste fino de hiperparámetros, especialmente en SVC y MLPClassifier.
+2.  La validación rigurosa a través de **intervalos de confianza** visualizados en subplots mediante `add_subplot` de **Matplotlib**.
+3.  La estabilidad mostrada por los **gráficos de validación**, que asegura que el modelo es altamente fiable y apto para su aplicación en entornos reales de análisis edafológico.
